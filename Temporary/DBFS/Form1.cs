@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Collections.Generic;
 
 namespace DBFS
 {
@@ -17,44 +12,48 @@ namespace DBFS
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
+            try
+            {
+                /* Deklarasi & Alokasi List of String: Menyimpan nama file dan folder */
+                List<string> AllFiles = new List<string>();
 
-        }
+                /* Menerima input folder */
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    string startingDir = fbd.SelectedPath;
+                    textBox1.Text = startingDir; // Mencetak path folder di textBox1
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+                    // Menjalankan ParsePath: Mencari folder & file dari  
+                    ParsePath(startingDir);
 
-        }
+                    // 
+                    void ParsePath(string path)
+                    {
+                        string[] SubDirs = Directory.GetDirectories(path);  // Membuka directory
+                        AllFiles.AddRange(Directory.GetFiles(path));        // Membaca file
+                        AllFiles.AddRange(SubDirs);                         // Membaca folder
+                        foreach (string subdir in SubDirs)                  // Membuka setiap folder
+                        {
+                            ParsePath(subdir);
+                        }
+                    }
+                }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+                /* Mencetak isi AllFiles: File/Folder yang ditemukan */
+                foreach (string file in AllFiles)
+                {
+                    string filename = Path.GetFileName(file);
+                    textBox2.Text = textBox2.Text + "\r\n" + filename;
+                }
+            }
+            catch (Exception ex)
+            {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
