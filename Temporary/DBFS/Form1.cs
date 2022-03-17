@@ -18,6 +18,7 @@ namespace DBFS
             {
                 /* Deklarasi & Alokasi List of String: Menyimpan nama file dan folder */
                 List<string> AllFiles = new List<string>();
+                DirectoryProcessor process;
 
                 /* Menerima input folder */
                 FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -26,10 +27,8 @@ namespace DBFS
                     string startingDir = fbd.SelectedPath;
                     textBox1.Text = startingDir; // Mencetak path folder di textBox1
 
-                    // Menjalankan ParsePath: Mencari folder & file dari  
+                    // Menjalankan ParsePath: Menentukan jumlah node  
                     ParsePath(startingDir);
-
-                    // 
                     void ParsePath(string path)
                     {
                         string[] SubDirs = Directory.GetDirectories(path);  // Membuka directory
@@ -40,14 +39,13 @@ namespace DBFS
                             ParsePath(subdir);
                         }
                     }
+
+                    process = new DirectoryProcessor(startingDir, AllFiles.Count, this);;
+
+                    gViewer1.Graph = process.process();
                 }
 
-                /* Mencetak isi AllFiles: File/Folder yang ditemukan */
-                foreach (string file in AllFiles)
-                {
-                    string filename = Path.GetFileName(file);
-                    textBox2.Text = textBox2.Text + "\r\n" + filename;
-                }
+            
             }
             catch (Exception ex)
             {
