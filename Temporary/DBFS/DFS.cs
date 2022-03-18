@@ -39,10 +39,18 @@ namespace DBFS{
             }
             // Implementasi rekurens dengan mencari child yang terhubung
             // Lakukan pemanggilan DFSrecursive pada child tersebut
-            
+            for (int i = startnode; i < graph.CountNode(); i++){
+                if (FindEdge(startnode, i) && !isVisited[i]){
+                    isVisited[i] = true;
+                    path.Add(startnode);
+                    return DFSrecursive(graph, i, targetnode);
+                }
+
+            }
+
+
+
+            return true; // JANGAN LUPA DI HAPUS APABILA SUDAH SELESAI
         }
-
-
-
     }
 }
