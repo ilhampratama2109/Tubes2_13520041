@@ -32,8 +32,14 @@ namespace DBFS{
             path = new List<int>();
             path.Add(startnode); // Catat path node pertama
         }
-        private List<int> DFSrecursive(Graph graph, int startnode, int targetnode){
-
+        private bool DFSrecursive(Graph graph, int startnode, int targetnode){
+            
+            if (startnode == targetnode){
+                return true;
+            }
+            // Implementasi rekurens dengan mencari child yang terhubung
+            // Lakukan pemanggilan DFSrecursive pada child tersebut
+            
         }
 
 
