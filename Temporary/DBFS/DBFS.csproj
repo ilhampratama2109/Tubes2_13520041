@@ -58,8 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graph.cs" />
-    <Compile Include="DirectoryProcessor.cs" />
+    <Compile Include="FolderCrawler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
