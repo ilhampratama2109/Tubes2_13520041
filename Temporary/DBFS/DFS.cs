@@ -1,3 +1,39 @@
+using System.Windows.Forms;
+using Microsoft.Msagl.Drawing;
+using Microsoft.Msagl.GraphViewerGdi;
+
+namespace DBFS{
+    class DFS{
+        /* ***** ATRIBUT ***** */
+        private Form1 form1;
+        private FolderCrawler fc;
+        private Graph graph;
+
+        /* Graph Nodes */
+        private List<string> listOfNode;
+        private List<string> parentNode;
+        private List<string> childNode;
+
+        /* Algorithm Atribute */
+        bool[] isSolution;
+        public DFS(Form1 f1, FolderCrawler fc, Graph g)
+        {
+            this.form1 = f1;
+            this.fc = fc;
+            this.graph = g;
+            this.listOfNode = fc.getListOfNode();
+            this.parentNode = fc.getParentNode();
+            this.ChildNode = fc.getChildNode();
+        }
+
+        // ALGORITMA proses DFS
+        public void DFSprocess(){
+            
+        }
+    }
+}
+
+/*
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +49,7 @@ private int index;
 private Graph graph;
 private Microsoft.Msagl.Drawing.Graph visualGraph;
 private Form1 form1;
-*/
+
 
 
 namespace DBFS{
@@ -54,4 +90,4 @@ namespace DBFS{
             return targetfound; // JANGAN LUPA DI HAPUS APABILA SUDAH SELESAI
         }
     }
-}
+}*/
