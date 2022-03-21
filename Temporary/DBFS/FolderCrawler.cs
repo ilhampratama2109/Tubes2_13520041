@@ -84,11 +84,6 @@ namespace DBFS
             /* KAMUS LOKAL */
 
             /* ALGORITMA */
-            for (int i = 0; i < this.listOfNode.Count; i++)
-            {
-                graph.AddNode(listOfNode[i]);
-            }
-
             for (int i = 0; i < this.parentNode.Count; i++)
             {
                 graph.AddEdge(parentNode[i], childNode[i]);
@@ -121,17 +116,14 @@ namespace DBFS
             return this.childNode;
         }
 
+        public bool getFindAll()
+        {
+            return this.findAll;
+        }
+
         public Form1 getForm()
         {
             return this.form1;
-        }
-
-        public void setNodeColor(int index, int colorCode)
-        {
-            if (index >= 0 && index < this.listOfNode.Count())
-            {
-
-            }
         }
 
         /* *** KASUS SEARCHER DIPISAH *** */
@@ -157,16 +149,8 @@ namespace DBFS
             else
             {
                 // DFS
-                if (this.findAll)
-                {
-                    // DFS dfs = new DFS(this, this.gviewer, this.graph, gviewer);
-                    // dfs.doDFSAllpanel);
-                }
-                else
-                {
-                    // DFS dfs = new DFS(this, this.gviewer, this.graph, gviewer);
-                    // dfs.doDFS();
-                }
+                DFS dfs = new DFS(this.form1, this, this.graph);
+                dfs.processDFS();
             }
         }
     }
