@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Msagl.Drawing;
+using Microsoft.Msagl.GraphViewerGdi;
 
 namespace DBFS
 {
@@ -65,8 +67,13 @@ namespace DBFS
             if (this.startingDirectory != null && this.fileToFind != null)
             {
                 FolderCrawler fc = new FolderCrawler(this.startingDirectory, this.fileToFind, this.algorithm, this.findAll, this);
-                fc.Search(panel1);
+                fc.Search(gViewer1);
             }
+        }
+
+        public void draw(Graph graph)
+        {
+            this.gViewer1.Graph = graph;
         }
     }
 }

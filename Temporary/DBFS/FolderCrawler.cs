@@ -84,12 +84,12 @@ namespace DBFS
             /* KAMUS LOKAL */
 
             /* ALGORITMA */
-            for (int i = 1; i < this.listOfNode.Count; i++)
+            for (int i = 0; i < this.listOfNode.Count; i++)
             {
                 graph.AddNode(listOfNode[i]);
             }
 
-            for (int i = 1; i < this.parentNode.Count; i++)
+            for (int i = 0; i < this.parentNode.Count; i++)
             {
                 graph.AddEdge(parentNode[i], childNode[i]);
             }
@@ -136,31 +136,21 @@ namespace DBFS
 
         /* *** KASUS SEARCHER DIPISAH *** */
         /* Search */
-        public void Search(Panel panel)
+        public void Search(GViewer gviewer)
         {
-            // bind the graph to the viewer 
-            gviewer.Graph = graph;
-
-            // associate the viewer with the form 
-            panel.SuspendLayout();
-            panel.Controls.Clear();
-
-            // link to panel
-            panel.Controls.Add(gviewer);
-            panel.ResumeLayout();
-            panel.Show();
+            form1.draw(graph);
 
             if (this.algorithm == 1)
             {
                 // BFS
                 if (this.findAll)
                 {
-                    // BFS bfs = new BFS(this, this.gviewer, this.graph, panel);
+                    // BFS bfs = new BFS(this, this.gviewer, this.graph, gviewer);
                     // bfs.doBFSAll(panel);
                 }
                 else
                 {
-                    // BFS bfs = new BFS(this, this.gviewer, this.graph, panel);
+                    // BFS bfs = new BFS(this, this.gviewer, this.graph, gviewer);
                     // bfs.doBFS(panel);
                 }
             }
@@ -169,12 +159,12 @@ namespace DBFS
                 // DFS
                 if (this.findAll)
                 {
-                    // DFS dfs = new DFS(this, this.gviewer, this.graph, panel);
+                    // DFS dfs = new DFS(this, this.gviewer, this.graph, gviewer);
                     // dfs.doDFSAllpanel);
                 }
                 else
                 {
-                    // DFS dfs = new DFS(this, this.gviewer, this.graph, panel);
+                    // DFS dfs = new DFS(this, this.gviewer, this.graph, gviewer);
                     // dfs.doDFS();
                 }
             }
