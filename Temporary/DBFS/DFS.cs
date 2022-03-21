@@ -16,6 +16,10 @@ namespace DBFS{
 
         /* Algorithm Atribute */
         bool[] isSolution;
+        bool[] visited;
+        List<int> adjchild;
+
+        /* ***** METHOD ***** */
         public DFS(Form1 f1, FolderCrawler fc, Graph g)
         {
             this.form1 = f1;
@@ -27,8 +31,81 @@ namespace DBFS{
         }
 
         // ALGORITMA proses DFS
-        public void DFSprocess(){
+        public void processDFS(){
+            // Root dikunjungi
+            visited[0] = true;
+            // Node dimasukkan ke path
+
             
+            // Inisialisasi false pada semua indeks visited selain indeks 0
+            for (int i = 1; i < this.listOfNode.Count; i++){
+                visited[i] = false;
+            }
+
+            // Mencatat adjacent child dari root
+            adjchild = returnAdjacentNodes(listOfNode[0]);
+
+            bool found;
+            for (int i = 0; i < this.adjchild.Count; i++){
+                string ctarget = childNode[adjchild[i]];
+                found = recursiveDFS(childIdxInLON(ctarget));
+            }
+
+            if (!found){
+                // File tidak ditemukan
+            }
+        }
+
+        private bool recursiveDFS(DFS currentDFS, int nodeIdx){
+            // Node urutan nodeIdx dikunjungi
+            visited[nodeIdx] = true;
+            // Node dimasukkan ke path
+
+
+            // Pengecekan apakah node ini merupakan file target
+            if (this.fileToFind == this.listOfNode[nodeIdx]){
+                return true;
+            }
+
+            // Apabila node ini bukan target, lanjut kunjungi child
+            // Mencatat adjacent child dari root
+            adjchild = returnAdjacentNodes(listOfNode[nodeIdx]);
+
+            // Ada kemungkinan node ini tidak punya child
+            // Sehingga diinisialisasi dengan false
+            bool found = false; 
+            for (int i = 0; i < this.adjchild.Count; i++){
+                string ctarget = childNode[adjchild[i]];
+                found = recursiveDFS(childIdxInLON(ctarget));
+            }
+
+            if (!found){
+                // Hapus node dari path pencarian yang valid
+            }
+        }
+
+        // Method untuk mencatat child yang adjacent dengan parent yang dikunjungi
+        private List<int> returnAdjacentNodes(string parentnode){
+            List<int> adjchild;
+            for (int i = 0; i < this.parentNode.Count; i++){
+                if (parentNode[i] == parentnode){
+                    adjchild.Add(i);
+                }
+            }
+            return adjchild;
+        }
+
+        // Method untuk mencari index node childTarget pada listOfNode
+        private int childIdxInLON(string childTarget){
+            int i = 0;
+            bool found = false;
+            while (!found){
+                if (this.listOfNode[i] == childTarget){
+                    found = true;
+                }
+                i++;
+            }
+            return i--;
         }
     }
 }
