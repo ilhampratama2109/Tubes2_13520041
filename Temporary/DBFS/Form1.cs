@@ -75,5 +75,10 @@ namespace DBFS
         {
             this.gViewer1.Graph = graph;
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

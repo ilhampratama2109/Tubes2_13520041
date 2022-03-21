@@ -25,3 +25,19 @@ D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Alg
 D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
 D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
 D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.csproj.CopyComplete
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\DBFS.exe.config
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\DBFS.exe
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\DBFS.pdb
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\AutomaticGraphLayout.dll
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\AutomaticGraphLayout.Drawing.dll
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.csproj.AssemblyReference.cache
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.csproj.SuggestedBindingRedirects.cache
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.Form1.resources
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.Properties.Resources.resources
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.csproj.GenerateResource.cache
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.csproj.CoreCompileInputs.cache
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.csproj.CopyComplete
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.exe
+E:\semester 4\strategi algoritma\tubes\tubes 2\Tubes2_13520041\Temporary\DBFS\obj\Debug\DBFS.pdb
