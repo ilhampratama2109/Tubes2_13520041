@@ -73,6 +73,9 @@ namespace DBFS
                     }
                 }
             }
+            this.form1.stopwatch.Stop();
+
+            this.form1.writeTimeElapsed();
 
             visualize();
         }
@@ -91,16 +94,24 @@ namespace DBFS
                 // Node target ditemukan
                 this.answerExist = true;
 
+                String solutionPath = this.fc.getStartingDirectory();
                 foreach (int idx in this.idxsolution)
                 {
+                    if (idx != 0 && this.listOfNode[idx] != this.fc.getFileToFind())
+                    {
+                        String node = this.listOfNode[idx];
+                        solutionPath = solutionPath + "\\" + node;
+                    }
                     isSolution[idx] = true;
                 }
+                this.form1.addComboBoxElmt(solutionPath);
 
                 // print path
 
 
                 if (this.fc.getFindAll())
                 {
+                    this.idxsolution.Remove(nodeIdx);
                     return false;
                 }
                 else

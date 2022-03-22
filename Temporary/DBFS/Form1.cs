@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
@@ -18,6 +20,8 @@ namespace DBFS
         private string fileToFind;
         private int algorithm;
         private bool findAll;
+        private string chosenPath;
+        public Stopwatch stopwatch;
 
         public Form1()
         {
@@ -66,8 +70,11 @@ namespace DBFS
         {
             if (this.startingDirectory != null && this.fileToFind != null)
             {
+                stopwatch = new Stopwatch();
+                stopwatch.Start();
                 FolderCrawler fc = new FolderCrawler(this.startingDirectory, this.fileToFind, this.algorithm, this.findAll, this);
                 fc.Search(gViewer1);
+                ComboBox comboBox1 = new ComboBox();
             }
         }
 
@@ -77,9 +84,33 @@ namespace DBFS
             this.Controls.Add(gViewer1);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        public void addComboBoxElmt(String path)
         {
+            this.comboBox1.Items.Add(path);
+        }
 
+        public void writeTimeElapsed()
+        {
+            this.textBox4.Text = stopwatch.Elapsed.ToString(@"ss\.ff");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(this.chosenPath))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = this.chosenPath,
+                    FileName = "explorer.exe"
+                };
+
+                Process.Start(startInfo);
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.chosenPath = comboBox1.SelectedItem.ToString();
         }
     }
 }
