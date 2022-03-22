@@ -45,7 +45,7 @@ namespace DBFS
             this.idxqueue = new Queue<int>();
         }
 
-        // ALGORITMA proses DFS
+        // ALGORITMA proses BFS
         public void processBFS()
         {
             // Root dikunjungi
@@ -74,6 +74,7 @@ namespace DBFS
                     this.idxsolution.Add(ctidx);
                     // Node diwarnai merah
                     graph.FindNode(listOfNode[ctidx]).Attr.Color = Color.Red;
+                    Console.WriteLine(listOfNode[ctidx]);
 
                     // Pengecekan apakah child yang baru saja dikunjungi
                     // merupakan target
@@ -89,7 +90,7 @@ namespace DBFS
                 }
             }
 
-            do{
+            do
             {
                 int childTarget = this.idxqueue.Dequeue();
                 List<int> adjchild2 = returnAdjacentNodes(listOfNode[childTarget]);
@@ -108,6 +109,7 @@ namespace DBFS
                         this.idxsolution.Add(ct2idx);
                         // Node diwarnai merah
                         graph.FindNode(listOfNode[ct2idx]).Attr.Color = Color.Red;
+                        Console.WriteLine(listOfNode[ct2idx]);
 
                         // Pengecekan apakah child yang baru saja dikunjungi
                         // merupakan target
@@ -125,11 +127,11 @@ namespace DBFS
             } while(this.idxqueue.Count > 0);
 
             if (this.answerExist){
-                for (int i = 0; i < listOfNode.Count; i++)
+                for (int x = 0; x < listOfNode.Count; x++)
                 {
-                    if (isSolution[i])
+                    if (isSolution[x])
                     {
-                        graph.FindNode(listOfNode[i]).Attr.Color = Color.Green;
+                        graph.FindNode(listOfNode[x]).Attr.Color = Color.Green;
                     }
                 }
             }

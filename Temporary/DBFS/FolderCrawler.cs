@@ -161,16 +161,8 @@ namespace DBFS
             if (this.algorithm == 1)
             {
                 // BFS
-                if (this.findAll)
-                {
-                    // BFS bfs = new BFS(this, this.gviewer, this.graph, gviewer);
-                    // bfs.doBFSAll(panel);
-                }
-                else
-                {
-                    // BFS bfs = new BFS(this, this.gviewer, this.graph, gviewer);
-                    // bfs.doBFS(panel);
-                }
+                BFS bfs = new BFS(this.form1, this, this.graph);
+                bfs.processBFS();
             }
             else
             {
