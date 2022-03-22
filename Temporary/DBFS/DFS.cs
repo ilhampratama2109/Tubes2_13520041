@@ -25,7 +25,9 @@ namespace DBFS
         private bool answerExist;
         private bool[] isSolution;
         private bool[] visited;
+        private List<int> searchPath;
         private List<int> idxsolution;
+        private List<List<int>> idxsolutionall;
 
         /* ***** METHOD ***** */
         public DFS(Form1 f1, FolderCrawler fc, Graph g)
@@ -39,6 +41,7 @@ namespace DBFS
 
             this.isSolution = new bool[listOfNode.Count];
             this.visited = new bool[listOfNode.Count];
+            this.searchPath = new List<int>();
             this.idxsolution = new List<int>();
         }
 
@@ -48,9 +51,8 @@ namespace DBFS
             // Root dikunjungi
             this.visited[0] = true;
             // Node dimasukkan ke path
+            this.searchPath.Add(0);
             this.idxsolution.Add(0);
-            // Node diwarnai merah
-            graph.FindNode(listOfNode[0]).Attr.Color = Color.Red;
 
             // Mencatat adjacent child dari root
             List<int> adjchild = returnAdjacentNodes(listOfNode[0]);
@@ -72,50 +74,38 @@ namespace DBFS
                 }
             }
 
-            if (this.answerExist){
-                for (int i = 0; i < listOfNode.Count; i++)
-                {
-                    if (isSolution[i])
-                    {
-                        graph.FindNode(listOfNode[i]).Attr.Color = Color.Green;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("File tidak ditemukan!");
-            }
+            visualize();
         }
 
         private bool recursiveDFS(int nodeIdx)
-        {   
+        {
             // Node urutan nodeIdx dikunjungi
-            Console.WriteLine(this.listOfNode[nodeIdx]);
             this.visited[nodeIdx] = true;
             // Node dimasukkan ke path
+            this.searchPath.Add(nodeIdx);
             this.idxsolution.Add(nodeIdx);
-            // Node diwarnai merah
-            graph.FindNode(listOfNode[nodeIdx]).Attr.Color = Color.Red;
 
             // Pengecekan apakah node ini merupakan file target
             if (this.fc.getFileToFind() == this.listOfNode[nodeIdx])
             {
                 // Node target ditemukan
                 this.answerExist = true;
-                // print path
-                
-                // path solusi dimasukan ke issolution
+
                 foreach (int idx in this.idxsolution)
                 {
                     isSolution[idx] = true;
                 }
-                
+
+                // print path
+
+
                 if (this.fc.getFindAll())
                 {
                     return false;
                 }
                 else
                 {
+                    // path solusi dimasukan ke issolution
                     return true;
                 }
             }
@@ -177,13 +167,43 @@ namespace DBFS
                 if (this.listOfNode[i] == childTarget)
                 {
                     found = true;
-                } 
+                }
                 else
                 {
                     i++;
                 }
             }
             return i;
+        }
+
+        private async void visualize()
+        {
+            // int j = 0;
+            for (int i = 0; i < this.searchPath.Count; i++)
+            {
+                await PutTaskDelay();
+                this.form1.SuspendLayout();
+                graph.FindNode(this.listOfNode[i]).Attr.Color = Color.Red;
+                this.form1.ResumeLayout();
+                this.form1.draw(graph);
+            }
+
+            for (int j = 0; j < listOfNode.Count; j++)
+            {
+                if (isSolution[j])
+                {
+                    graph.FindNode(this.listOfNode[j]).Attr.Color = Color.Green;
+                }
+            }
+
+            if (!this.answerExist)
+            {
+                MessageBox.Show("File tidak ditemukan!");
+            }
+        }
+        async Task PutTaskDelay()
+        {
+            await Task.Delay(500);
         }
     }
 }

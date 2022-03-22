@@ -126,6 +126,32 @@ namespace DBFS
             return this.form1;
         }
 
+        public async Task updateGraphAsync(string node, int colorCode)
+        {
+            if (colorCode == 0)
+            {
+                await PutTaskDelay();
+                this.form1.SuspendLayout();
+                graph.FindNode(node).Attr.Color = Color.Green;
+                this.form1.ResumeLayout();
+                this.form1.draw(graph);
+            } 
+            else
+            {
+                await PutTaskDelay();
+                this.form1.SuspendLayout();
+                graph.FindNode(node).Attr.Color = Color.Red;
+                this.form1.ResumeLayout();
+                this.form1.draw(graph);
+            }
+        }
+
+        async Task PutTaskDelay()
+        {
+            await Task.Delay(2000);
+        }
+
+
         /* *** KASUS SEARCHER DIPISAH *** */
         /* Search */
         public void Search(GViewer gviewer)
@@ -153,5 +179,7 @@ namespace DBFS
                 dfs.processDFS();
             }
         }
+
+        
     }
 }

@@ -74,6 +74,7 @@ namespace DBFS
         public void draw(Graph graph)
         {
             this.gViewer1.Graph = graph;
+            this.Controls.Add(gViewer1);
         }
 
         private void label2_Click(object sender, EventArgs e)
