@@ -194,7 +194,7 @@ namespace DBFS
             {
                 await PutTaskDelay();
                 this.form1.SuspendLayout();
-                graph.FindNode(this.listOfNode[i]).Attr.Color = Color.Red;
+                graph.FindNode(this.listOfNode[searchPath[i]]).Attr.Color = Color.Red;
                 this.form1.ResumeLayout();
                 this.form1.draw(graph);
             }

@@ -26,6 +26,7 @@ namespace DBFS
         private bool[] isSolution;
         private bool[] visited;
         private List<int> idxsolution;
+        private List<int> searchPath;
         private Queue<int> idxqueue;
 
         /* ***** METHOD ***** */
@@ -42,6 +43,7 @@ namespace DBFS
             this.isSolution = new bool[listOfNode.Count];
             this.visited = new bool[listOfNode.Count];
             this.idxsolution = new List<int>();
+            this.searchPath = new List<int>();
             this.idxqueue = new Queue<int>();
         }
 
@@ -50,10 +52,8 @@ namespace DBFS
         {
             // Root dikunjungi
             this.visited[0] = true;
-            // Node dimasukkan ke path
-            this.idxsolution.Add(0);
             // Node diwarnai merah
-            graph.FindNode(listOfNode[0]).Attr.Color = Color.Red;
+            this.searchPath.Add(0);
 
             // Mencatat adjacent child dari root
             List<int> adjchild = returnAdjacentChildNodes(listOfNode[0]);
@@ -65,24 +65,23 @@ namespace DBFS
             {
                 string ct = childNode[adjchild[i]];
                 int ctidx = childIdxInLON(ct);
+
+                this.searchPath.Add(ctidx);
+
                 if (ctidx < this.listOfNode.Count){
                     // Masukkan child ke dalam antrian
                     this.idxqueue.Enqueue(ctidx);
                     this.visited[ctidx] = true;
 
-                    // Node dimasukkan ke path
-                    this.idxsolution.Add(ctidx);
-                    // Node diwarnai merah
-                    graph.FindNode(listOfNode[ctidx]).Attr.Color = Color.Red;
-                    Console.WriteLine(listOfNode[ctidx]);
-
                     // Pengecekan apakah child yang baru saja dikunjungi
                     // merupakan target
                     if (this.fc.getFileToFind() == this.listOfNode[ctidx]){
+                        // Node dimasukkan ke path
+                        this.searchPath.Add(ctidx);
                         this.answerExist = true;
-
-                        // Path target diberi warna hijau
-                        // the code goes here...
+                    } 
+                    else{
+                        i++;
                     }
                 }
                 else{
@@ -90,7 +89,7 @@ namespace DBFS
                 }
             }
 
-            do
+            while(this.idxqueue.Count > 0 && !this.answerExist)
             {
                 int childTarget = this.idxqueue.Dequeue();
                 List<int> adjchild2 = returnAdjacentChildNodes(listOfNode[childTarget]);
@@ -98,6 +97,8 @@ namespace DBFS
                 while (j < adjchild2.Count && !keepGoingCheck()){
                     string ct2 = childNode[adjchild2[j]];
                     int ct2idx = childIdxInLON(ct2);
+                    
+                    this.searchPath.Add(ct2idx);
                     bool nodeIsVisited = this.visited[ct2idx];
 
                     if (ct2idx < this.listOfNode.Count && !nodeIsVisited){
@@ -105,31 +106,17 @@ namespace DBFS
                         this.idxqueue.Enqueue(ct2idx);
                         this.visited[ct2idx] = true;
 
-                        // Node diwarnai merah
-                        graph.FindNode(listOfNode[ct2idx]).Attr.Color = Color.Red;
-                        Console.WriteLine(listOfNode[ct2idx]);
-
                         // Pengecekan apakah child yang baru saja dikunjungi
                         // merupakan target
                         if (this.fc.getFileToFind() == this.listOfNode[ct2idx]){
                             // Node dimasukkan ke path
-                            this.idxsolution.Add(ct2idx);
+                            this.searchPath.Add(ct2idx);
                             this.answerExist = true;
 
-                            /* ILUSTRASI UNTUK ALAT BANTU PENJELASAN
-                                        root
-                                folderA     folderB
-                                    - root.txt
-                            parentNode[0] = root
-                            childNode[0] = folderA
-                            parentNode[1] = root
-                            childNode[1] = folderB
-                            parentNode[2] = folderA
-                            childNode[2] = root.txt
-                            parentNode[3] = folderB
-                            childNode[3] = root.txt */
-
                             // Memasukkan path idx ke idxsolution
+                            this.idxsolution.Add(ct2idx);
+                            this.isSolution[ct2idx] = true;
+
                             if (this.fc.getFindAll()){
                                 this.trackAllPath(ct2idx);
                             }
@@ -138,26 +125,21 @@ namespace DBFS
                             }
                             // Warnai semua index pada idxsolution
                         }
+                        else{
+                            j++;
+                        }
                     }
                     else{
                         j++;
                     }
                 }
-            } while(this.idxqueue.Count > 0);
+            }
 
-            if (this.answerExist){
-                for (int x = 0; x < listOfNode.Count; x++)
-                {
-                    if (isSolution[x])
-                    {
-                        graph.FindNode(listOfNode[x]).Attr.Color = Color.Green;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("File tidak ditemukan!");
-            }
+            this.form1.stopwatch.Stop();
+
+            this.form1.writeTimeElapsed();
+
+            visualize();
         }
 
         // Mencari path index dari solusi (khusus getFindAll == true)
@@ -177,9 +159,23 @@ namespace DBFS
                     if (parentInLONidx < this.listOfNode.Count)
                     {
                         this.idxsolution.Add(parentInLONidx);
-                        this.trackThePath(parentInLONidx);
+                        this.isSolution[parentInLONidx] = true;
+                        this.trackAllPath(parentInLONidx);
                     }
                 }
+            } 
+            else
+            {
+                string solutionPath = this.fc.getStartingDirectory();
+                for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
+                {
+                    if (idx != this.idxsolution.Count - 1)
+                    {
+                        String node = this.listOfNode[idxsolution[idx]];
+                        solutionPath = solutionPath + "\\" + node;
+                    }
+                }
+                this.form1.addComboBoxElmt(solutionPath);
             }
         }
 
@@ -199,8 +195,22 @@ namespace DBFS
                 if (parentInLONidx < this.listOfNode.Count)
                 {
                     this.idxsolution.Add(parentInLONidx);
-                    this.trackThePath(parentInLONidx);
+                    this.isSolution[parentInLONidx] = true;
+                    this.trackOnePath(parentInLONidx);
                 }
+            }
+            else
+            {
+                string solutionPath = this.fc.getStartingDirectory();
+                for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
+                {
+                    if (idx != this.idxsolution.Count - 1)
+                    {
+                        String node = this.listOfNode[idxsolution[idx]];
+                        solutionPath = solutionPath + "\\" + node;
+                    }
+                }
+                this.form1.addComboBoxElmt(solutionPath);
             }
         }
 
@@ -255,6 +265,36 @@ namespace DBFS
                 }
             }
             return i;
+        }
+
+        private async void visualize()
+        {
+            // int j = 0;
+            for (int i = 0; i < this.searchPath.Count; i++)
+            {
+                await PutTaskDelay();
+                this.form1.SuspendLayout();
+                graph.FindNode(this.listOfNode[searchPath[i]]).Attr.Color = Color.Red;
+                this.form1.ResumeLayout();
+                this.form1.draw(graph);
+            }
+
+            for (int j = 0; j < listOfNode.Count; j++)
+            {
+                if (isSolution[j])
+                {
+                    graph.FindNode(this.listOfNode[j]).Attr.Color = Color.Green;
+                }
+            }
+
+            if (!this.answerExist)
+            {
+                MessageBox.Show("File tidak ditemukan!");
+            }
+        }
+        async Task PutTaskDelay()
+        {
+            await Task.Delay(500);
         }
     }
 }
