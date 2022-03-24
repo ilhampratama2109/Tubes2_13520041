@@ -27,6 +27,7 @@ namespace DBFS
         private bool[] visited;
         private List<int> idxsolution;
         private List<int> searchPath;
+        private List<List<int>> listOfSolution;
         private Queue<int> idxqueue;
 
         /* ***** METHOD ***** */
@@ -44,6 +45,7 @@ namespace DBFS
             this.visited = new bool[listOfNode.Count];
             this.idxsolution = new List<int>();
             this.searchPath = new List<int>();
+            this.listOfSolution = new List<List<int>>;
             this.idxqueue = new Queue<int>();
         }
 
@@ -162,9 +164,24 @@ namespace DBFS
                         this.trackAllPath(parentInLONidx);
                     }
                 }
-            } 
-            else
-            {
+            }
+            else if (this.listOfNode[childindex] == "root"){
+                // Masukkan root ke idxsolution
+                this.idxsolution.Add(childindex);
+
+                // Masukkan idxsolution pertama ke listOfSolution
+                this.listOfSolution.Add(this.idxsolution);
+
+                // Menghapus elemen idxsolution dari belakang
+                // Penghapusan dilakukan sampai indeks ke- 1
+                int deleteidx = this.idxsolution.Count - 1;
+                bool deletesuccess = true;
+                while(deleteidx > 0 && deletesuccess){
+                    deletesuccess = this.idxsolution.Remove(this.idxsolution[deleteidx]);
+                    deleteidx--;
+                }
+
+                // Pengembalian path
                 string solutionPath = this.fc.getStartingDirectory();
                 for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
                 {
