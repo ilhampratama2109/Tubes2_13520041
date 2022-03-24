@@ -61,7 +61,8 @@ namespace DBFS
             for (int i = 0; i < adjchild.Count; i++)
             {
                 string ctarget = childNode[adjchild[i]];
-                if (childIdxInLON(ctarget) < this.listOfNode.Count)
+                int ctidx = childIdxInLON(ctarget);
+                if (ctidx < this.listOfNode.Count)
                 {
                     if (!this.fc.getFindAll() && answerExist)
                     {
@@ -69,7 +70,7 @@ namespace DBFS
                     }
                     else
                     {
-                        found = recursiveDFS(childIdxInLON(ctarget));
+                        found = recursiveDFS(ctidx);
                     }
                 }
             }
@@ -131,7 +132,8 @@ namespace DBFS
             for (int i = 0; i < adjchild.Count; i++)
             {
                 string ctarget = childNode[adjchild[i]];
-                if (childIdxInLON(ctarget) < this.listOfNode.Count)
+                int ct2idx = childIdxInLON(ctarget);
+                if (ct2idx < this.listOfNode.Count)
                 {
                     if (!this.fc.getFindAll() && answerExist)
                     {
@@ -139,7 +141,7 @@ namespace DBFS
                     }
                     else
                     {
-                        found = recursiveDFS(childIdxInLON(ctarget));
+                        found = recursiveDFS(ct2idx);
                     }
                 }
             }

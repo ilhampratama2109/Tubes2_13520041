@@ -56,7 +56,13 @@ namespace DBFS
         /* FIND ALL OCURRENCE BUTTON */
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            this.findAll = true;
+            if (this.findAll == true)
+            {
+                this.findAll = false;
+            } else
+            {
+                this.findAll = true;
+            }
         }
 
         /* ALGORITHM CHOOSE BUTTON */
@@ -77,8 +83,10 @@ namespace DBFS
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
                 FolderCrawler fc = new FolderCrawler(this.startingDirectory, this.fileToFind, this.algorithm, this.findAll, this);
-                fc.Search(gViewer1);
                 ComboBox comboBox1 = new ComboBox();
+                this.comboBox1.Items.Clear();
+                this.comboBox1.ResetText();
+                fc.Search(gViewer1);
             }
         }
 
@@ -107,6 +115,7 @@ namespace DBFS
         private void button4_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(this.chosenPath);
+            MessageBox.Show("Path copied to clipboard");
         }
 
         /* DRAW GRAPH TO VIEWER */

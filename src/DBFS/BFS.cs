@@ -27,7 +27,6 @@ namespace DBFS
         private bool[] visited;
         private List<int> idxsolution;
         private List<int> searchPath;
-        private List<List<int>> listOfSolution;
         private Queue<int> idxqueue;
 
         /* ***** METHOD ***** */
@@ -45,7 +44,6 @@ namespace DBFS
             this.visited = new bool[listOfNode.Count];
             this.idxsolution = new List<int>();
             this.searchPath = new List<int>();
-            this.listOfSolution = new List<List<int>>;
             this.idxqueue = new Queue<int>();
         }
 
@@ -145,7 +143,7 @@ namespace DBFS
 
         // Mencari path index dari solusi (khusus getFindAll == true)
         private void trackAllPath(int childindex){
-            if (!(this.listOfNode[childindex] == "root")){
+            if (!(childindex == 0)){
                 this.idxsolution.Add(childindex);
                 List<int> adjparent = returnAdjacentParentNodes(this.listOfNode[childindex]);
 
@@ -165,12 +163,22 @@ namespace DBFS
                     }
                 }
             }
-            else if (this.listOfNode[childindex] == "root"){
+            else{
                 // Masukkan root ke idxsolution
                 this.idxsolution.Add(childindex);
 
-                // Masukkan idxsolution pertama ke listOfSolution
-                this.listOfSolution.Add(this.idxsolution);
+                // Pengembalian path
+                string solutionPath = this.fc.getStartingDirectory();
+                
+                for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
+                {
+                    if (idx != this.idxsolution.Count - 1)
+                    {
+                        String node = this.listOfNode[idxsolution[idx]];
+                        solutionPath = solutionPath + "\\" + node;
+                    }
+                }
+                this.form1.addComboBoxElmt(solutionPath);
 
                 // Menghapus elemen idxsolution dari belakang
                 // Penghapusan dilakukan sampai indeks ke- 1
@@ -181,17 +189,6 @@ namespace DBFS
                     deleteidx--;
                 }
 
-                // Pengembalian path
-                string solutionPath = this.fc.getStartingDirectory();
-                for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
-                {
-                    if (idx != this.idxsolution.Count - 1)
-                    {
-                        String node = this.listOfNode[idxsolution[idx]];
-                        solutionPath = solutionPath + "\\" + node;
-                    }
-                }
-                this.form1.addComboBoxElmt(solutionPath);
             }
         }
 
@@ -217,6 +214,7 @@ namespace DBFS
             }
             else
             {
+                this.idxsolution.Add(childindex);
                 string solutionPath = this.fc.getStartingDirectory();
                 for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
                 {
