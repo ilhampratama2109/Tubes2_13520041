@@ -114,7 +114,6 @@ namespace DBFS
                             this.answerExist = true;
 
                             // Memasukkan path idx ke idxsolution
-                            this.idxsolution.Add(ct2idx);
                             this.isSolution[ct2idx] = true;
 
                             if (this.fc.getFindAll()){
@@ -145,6 +144,7 @@ namespace DBFS
         // Mencari path index dari solusi (khusus getFindAll == true)
         private void trackAllPath(int childindex){
             if (!(this.listOfNode[childindex] == "root")){
+                this.idxsolution.Add(childindex);
                 List<int> adjparent = returnAdjacentParentNodes(this.listOfNode[childindex]);
 
                 // Semua parent yang terhubung dengan child saat ini
@@ -158,7 +158,6 @@ namespace DBFS
                     int parentInLONidx = childIdxInLON(ptarget);
                     if (parentInLONidx < this.listOfNode.Count)
                     {
-                        this.idxsolution.Add(parentInLONidx);
                         this.isSolution[parentInLONidx] = true;
                         this.trackAllPath(parentInLONidx);
                     }
@@ -182,6 +181,7 @@ namespace DBFS
         // Mencari path index dari solusi (khusus getFindAll == false)
         private void trackOnePath(int childindex){
             if (!(childindex == 0)){
+                this.idxsolution.Add(childindex);
                 List<int> adjparent = returnAdjacentParentNodes(this.listOfNode[childindex]);
 
                 // Indeks 0 dari adjparent adalah parent yang pertama
@@ -194,7 +194,6 @@ namespace DBFS
                 int parentInLONidx = childIdxInLON(ptarget);
                 if (parentInLONidx < this.listOfNode.Count)
                 {
-                    this.idxsolution.Add(parentInLONidx);
                     this.isSolution[parentInLONidx] = true;
                     this.trackOnePath(parentInLONidx);
                 }

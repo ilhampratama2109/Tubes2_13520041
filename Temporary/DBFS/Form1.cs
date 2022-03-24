@@ -28,7 +28,7 @@ namespace DBFS
             InitializeComponent();
         }
 
-        /* Aksi Ketika Menekan Button1 */
+        /* STARTING FOLDER INSERTION BUTTON */
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -47,16 +47,19 @@ namespace DBFS
             }
         }
 
+        /* FILENAME TO FIND INSERTION BOX */
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             this.fileToFind = textBox2.Text;
         }
 
+        /* FIND ALL OCURRENCE BUTTON */
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             this.findAll = true;
         }
 
+        /* ALGORITHM CHOOSE BUTTON */
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             this.algorithm = 1;
@@ -66,6 +69,7 @@ namespace DBFS
             this.algorithm = 2;
         }
 
+        /* START SEARCHING PROCESS */
         private void button2_Click(object sender, EventArgs e)
         {
             if (this.startingDirectory != null && this.fileToFind != null)
@@ -78,22 +82,13 @@ namespace DBFS
             }
         }
 
-        public void draw(Graph graph)
+        /* HYPERLINK CHOOSE COMBOBOX */
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.gViewer1.Graph = graph;
-            this.Controls.Add(gViewer1);
+            this.chosenPath = comboBox1.SelectedItem.ToString();
         }
 
-        public void addComboBoxElmt(String path)
-        {
-            this.comboBox1.Items.Add(path);
-        }
-
-        public void writeTimeElapsed()
-        {
-            this.textBox4.Text = stopwatch.Elapsed.ToString(@"ss\.ff");
-        }
-
+        /* OPEN HYPERLINK BUTTON */
         private void button3_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(this.chosenPath))
@@ -108,9 +103,29 @@ namespace DBFS
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /* COPY HYPERLINK BUTTOB */
+        private void button4_Click(object sender, EventArgs e)
         {
-            this.chosenPath = comboBox1.SelectedItem.ToString();
+            Clipboard.SetText(this.chosenPath);
+        }
+
+        /* DRAW GRAPH TO VIEWER */
+        public void draw(Graph graph)
+        {
+            this.gViewer1.Graph = graph;
+            this.Controls.Add(gViewer1);
+        }
+
+        /* ADD HYPERLINK */
+        public void addComboBoxElmt(String path)
+        {
+            this.comboBox1.Items.Add(path);
+        }
+
+        /* PRINT TIME TAKEN FOR SEARCHING (EXCLUDE VISUALIZATION) */
+        public void writeTimeElapsed()
+        {
+            this.textBox4.Text = stopwatch.Elapsed.ToString(@"ss\.ff");
         }
     }
 }
