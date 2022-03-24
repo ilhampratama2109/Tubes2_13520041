@@ -80,13 +80,14 @@ namespace DBFS
         {
             if (this.startingDirectory != null && this.fileToFind != null)
             {
+                this.textBox4.Clear();
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
                 FolderCrawler fc = new FolderCrawler(this.startingDirectory, this.fileToFind, this.algorithm, this.findAll, this);
                 ComboBox comboBox1 = new ComboBox();
                 this.comboBox1.Items.Clear();
                 this.comboBox1.ResetText();
-                fc.Search(gViewer1);
+                fc.Search();
             }
         }
 
@@ -111,7 +112,7 @@ namespace DBFS
             }
         }
 
-        /* COPY HYPERLINK BUTTOB */
+        /* COPY HYPERLINK BUTTON */
         private void button4_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(this.chosenPath);
@@ -134,7 +135,7 @@ namespace DBFS
         /* PRINT TIME TAKEN FOR SEARCHING (EXCLUDE VISUALIZATION) */
         public void writeTimeElapsed()
         {
-            this.textBox4.Text = stopwatch.Elapsed.ToString(@"ss\.ff");
+            this.textBox4.Text = stopwatch.Elapsed.ToString(@"ss\.ffff");
         }
     }
 }

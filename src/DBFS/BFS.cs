@@ -52,7 +52,6 @@ namespace DBFS
         {
             // Root dikunjungi
             this.visited[0] = true;
-            // Node diwarnai merah
             this.searchPath.Add(0);
 
             // Mencatat adjacent child dari root
@@ -61,47 +60,56 @@ namespace DBFS
             // Tandai semua child telah dikunjungi
             // Masukkan ke dalam queue
             int i = 0;
-            while (i < adjchild.Count && !keepGoingCheck())
+            while (i < adjchild.Count && !stopCheck())
             {
                 string ct = childNode[adjchild[i]];
                 int ctidx = childIdxInLON(ct);
 
                 this.searchPath.Add(ctidx);
 
-                if (ctidx < this.listOfNode.Count){
+                if (ctidx < this.listOfNode.Count)
+                {
                     // Masukkan child ke dalam antrian
                     this.idxqueue.Enqueue(ctidx);
                     this.visited[ctidx] = true;
 
                     // Pengecekan apakah child yang baru saja dikunjungi
                     // merupakan target
-                    if (this.fc.getFileToFind() == this.listOfNode[ctidx]){
-                        // Node dimasukkan ke path
-                        this.searchPath.Add(ctidx);
+                    if (this.fc.getFileToFind() == this.listOfNode[ctidx])
+                    {
+                        isSolution[ctidx] = true;
                         this.answerExist = true;
+                        if (stopCheck())
+                        {
+                            this.trackOnePath(ctidx);
+                        } 
+                        else{
+                            this.trackAllPath(ctidx);
+                            i++;
+                        }
                     } 
                     else{
                         i++;
                     }
-                }
+                } 
                 else{
                     i++;
                 }
             }
 
-            while(this.idxqueue.Count > 0 && !this.answerExist)
+            while(this.idxqueue.Count > 0 && !stopCheck())
             {
                 int childTarget = this.idxqueue.Dequeue();
                 List<int> adjchild2 = returnAdjacentChildNodes(listOfNode[childTarget]);
                 int j = 0;
-                while (j < adjchild2.Count && !keepGoingCheck()){
+                while (j < adjchild2.Count && !stopCheck()){
                     string ct2 = childNode[adjchild2[j]];
                     int ct2idx = childIdxInLON(ct2);
                     
-                    this.searchPath.Add(ct2idx);
                     bool nodeIsVisited = this.visited[ct2idx];
 
                     if (ct2idx < this.listOfNode.Count && !nodeIsVisited){
+                        this.searchPath.Add(ct2idx);
                         // Masukkan child ke dalam antrian
                         this.idxqueue.Enqueue(ct2idx);
                         this.visited[ct2idx] = true;
@@ -109,20 +117,17 @@ namespace DBFS
                         // Pengecekan apakah child yang baru saja dikunjungi
                         // merupakan target
                         if (this.fc.getFileToFind() == this.listOfNode[ct2idx]){
-                            // Node dimasukkan ke path
-                            this.searchPath.Add(ct2idx);
                             this.answerExist = true;
 
                             // Memasukkan path idx ke idxsolution
-                            this.isSolution[ct2idx] = true;
-
                             if (this.fc.getFindAll()){
                                 this.trackAllPath(ct2idx);
+                                j++;
                             }
                             else{
                                 this.trackOnePath(ct2idx);
+                                j++;
                             }
-                            // Warnai semua index pada idxsolution
                         }
                         else{
                             j++;
@@ -135,9 +140,7 @@ namespace DBFS
             }
 
             this.form1.stopwatch.Stop();
-
             this.form1.writeTimeElapsed();
-
             visualize();
         }
 
@@ -145,6 +148,7 @@ namespace DBFS
         private void trackAllPath(int childindex){
             if (!(childindex == 0)){
                 this.idxsolution.Add(childindex);
+                this.isSolution[childindex] = true;
                 List<int> adjparent = returnAdjacentParentNodes(this.listOfNode[childindex]);
 
                 // Semua parent yang terhubung dengan child saat ini
@@ -158,7 +162,6 @@ namespace DBFS
                     int parentInLONidx = childIdxInLON(ptarget);
                     if (parentInLONidx < this.listOfNode.Count)
                     {
-                        this.isSolution[parentInLONidx] = true;
                         this.trackAllPath(parentInLONidx);
                     }
                 }
@@ -166,6 +169,7 @@ namespace DBFS
             else{
                 // Masukkan root ke idxsolution
                 this.idxsolution.Add(childindex);
+                this.isSolution[childindex] = true;
 
                 // Pengembalian path
                 string solutionPath = this.fc.getStartingDirectory();
@@ -196,6 +200,7 @@ namespace DBFS
         private void trackOnePath(int childindex){
             if (!(childindex == 0)){
                 this.idxsolution.Add(childindex);
+                this.isSolution[childindex] = true;
                 List<int> adjparent = returnAdjacentParentNodes(this.listOfNode[childindex]);
 
                 // Indeks 0 dari adjparent adalah parent yang pertama
@@ -208,13 +213,13 @@ namespace DBFS
                 int parentInLONidx = childIdxInLON(ptarget);
                 if (parentInLONidx < this.listOfNode.Count)
                 {
-                    this.isSolution[parentInLONidx] = true;
                     this.trackOnePath(parentInLONidx);
                 }
             }
             else
             {
                 this.idxsolution.Add(childindex);
+                this.isSolution[childindex] = true;
                 string solutionPath = this.fc.getStartingDirectory();
                 for (int idx = this.idxsolution.Count - 1; idx > 0; idx--)
                 {
@@ -229,7 +234,7 @@ namespace DBFS
         }
 
         // Method untuk memeriksa apakah masih perlu lanjut atau tidak
-        private bool keepGoingCheck(){
+        private bool stopCheck(){
             return (!this.fc.getFindAll() && this.answerExist);
         }
 
@@ -281,6 +286,7 @@ namespace DBFS
             return i;
         }
 
+        // Method untuk memvisualisasikan langkah per langkah algoritma
         private async void visualize()
         {
             // int j = 0;
@@ -288,6 +294,7 @@ namespace DBFS
             {
                 await PutTaskDelay();
                 this.form1.SuspendLayout();
+                Console.WriteLine(this.listOfNode[searchPath[i]]);
                 graph.FindNode(this.listOfNode[searchPath[i]]).Attr.Color = Color.Red;
                 this.form1.ResumeLayout();
                 this.form1.draw(graph);

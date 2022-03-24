@@ -27,7 +27,6 @@ namespace DBFS
         private bool[] visited;
         private List<int> searchPath;
         private List<int> idxsolution;
-        private List<List<int>> idxsolutionall;
 
         /* ***** METHOD ***** */
         public DFS(Form1 f1, FolderCrawler fc, Graph g)
@@ -106,9 +105,6 @@ namespace DBFS
                     isSolution[idx] = true;
                 }
                 this.form1.addComboBoxElmt(solutionPath);
-
-                // print path
-
 
                 if (this.fc.getFindAll())
                 {
@@ -189,6 +185,7 @@ namespace DBFS
             return i;
         }
 
+        // Method untuk memvisualisasikan langkah per langkah algoritma
         private async void visualize()
         {
             // int j = 0;

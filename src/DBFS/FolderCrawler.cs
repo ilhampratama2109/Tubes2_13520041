@@ -27,7 +27,6 @@ namespace DBFS
 
         /* Graph */
         private Graph graph;
-        private GViewer gviewer;
 
         /* ***** METHOD ***** */
         /* User-Defined Constructor */
@@ -47,7 +46,6 @@ namespace DBFS
 
             /* Graph */
             graph = new Graph("graph");
-            gviewer = new GViewer();
             this.ConstructGraph();
         }
 
@@ -154,7 +152,7 @@ namespace DBFS
 
         /* *** KASUS SEARCHER DIPISAH *** */
         /* Search */
-        public void Search(GViewer gviewer)
+        public void Search()
         {
             form1.draw(graph);
 
