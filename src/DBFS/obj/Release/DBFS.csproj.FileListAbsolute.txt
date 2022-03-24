@@ -1,0 +1,16 @@
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\DBFS.exe.config
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\DBFS.exe
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\DBFS.pdb
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\AutomaticGraphLayout.dll
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\AutomaticGraphLayout.Drawing.dll
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\Microsoft.Msagl.GraphViewerGdi.dll
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\bin\Release\Microsoft.Msagl.WpfGraphControl.dll
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.csproj.AssemblyReference.cache
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.csproj.SuggestedBindingRedirects.cache
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.Form1.resources
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.Properties.Resources.resources
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.csproj.GenerateResource.cache
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.csproj.CoreCompileInputs.cache
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.csproj.CopyComplete
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.exe
+D:\Documents\File Eiffel\ITB\Dokumen ITB Eiffel\Semester 4\IF2211 - Strategi Algoritma\Tugas Besar\Tugas Besar 2\Tubes2_13520041\src\DBFS\obj\Release\DBFS.pdb
